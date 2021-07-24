@@ -23,4 +23,14 @@ export default StyleSheet.create({
     height: getSize.m(60),
     borderRadius: getSize.m(5),
   },
+  next: {
+    alignItems: 'center',
+    borderTopLeftRadius: getSize.m(20),
+    borderBottomLeftRadius: getSize.m(20),
+    padding: getSize.m(10),
+    backgroundColor: theme.colors.white,
+    position: 'absolute',
+    top: getSize.m(80),
+    right: 0,
+  },
 });

@@ -45,17 +45,13 @@ const HeaderHome = () => {
   );
 };
 
-const HeaderCommon = ({title, canGoBack, edit}) => {
+const HeaderCommon = ({title, canGoBack, upload}) => {
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
+
   return (
     <Block>
-      <Block
-        row
-        alignCenter
-        paddingTop={top + 10}
-        paddingVertical={16}
-        space="between">
+      <Block row alignCenter paddingTop={top + 10} paddingVertical={16}>
         {canGoBack && (
           <Pressable onPress={() => navigation.goBack()}>
             <Image
@@ -65,7 +61,6 @@ const HeaderCommon = ({title, canGoBack, edit}) => {
             />
           </Pressable>
         )}
-
         {title && (
           <Text
             flex
@@ -76,10 +71,10 @@ const HeaderCommon = ({title, canGoBack, edit}) => {
             {title}
           </Text>
         )}
-        {edit && (
+        {upload && (
           <Pressable onPress={() => navigation.goBack()}>
             <Image
-              source={icons.edit}
+              source={icons.upload}
               style={styles.iconBack}
               resizeMode="contain"
             />

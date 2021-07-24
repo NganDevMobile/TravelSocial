@@ -20,6 +20,9 @@ const icons = {
   next: require('./icons/next.png'),
   details: require('./icons/details.png'),
   password: require('./icons/password.png'),
+  upload: require('./icons/upload.png'),
+  bell: require('./icons/bell.png'),
+  noti: require('./icons/noti.png'),
 };
 
 const lotties = {

@@ -14,6 +14,11 @@ const OptionScreen = () => {
 
   return (
     <Block flex alignCenter justifyCenter paddingHorizontal={16}>
+      <Pressable style={styles.next}>
+        <Block>
+          <Text center>Bỏ qua</Text>
+        </Block>
+      </Pressable>
       <Image resizeMode="contain" source={images.option} style={styles.logo} />
       <Button
         onPress={() => navigation.navigate(routes.LOGIN_SCREEN)}

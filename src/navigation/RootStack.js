@@ -6,6 +6,7 @@ import {routes} from '../navigation/routes';
 import BottomNavigation from './BottomNavigation';
 import {auth} from '@screens/Auth';
 import {common} from '@screens/Common';
+import {bottom} from '@screens/Bottom';
 
 const Stack = createStackNavigator();
 const RootStack = () => {
@@ -36,6 +37,10 @@ const RootStack = () => {
         <Stack.Screen
           name={routes.SEARCH_SCREEN}
           component={common.SEARCH_SCREEN}
+        />
+        <Stack.Screen
+          name={routes.PERSONAL_POST}
+          component={bottom.PERSONAL_POST}
         />
       </Stack.Navigator>
     </NavigationContainer>

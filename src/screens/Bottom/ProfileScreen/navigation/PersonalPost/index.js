@@ -1,12 +1,16 @@
 import {Block, Header} from '@components';
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {FlatList, ScrollView} from 'react-native';
-import ItemGroup from '@components/Common/ItemList/ItemGroup';
+import {Image, FlatList} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ItemPost from '@components/Common/ItemList/ItemPost';
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const HomeScreen = () => {
+const PersonalPost = () => {
+  const navigation = useNavigation();
+  const {top} = useSafeAreaInsets();
+  const user = 'aaa';
   const _renderItemPost = item => (
     <ItemPost
     // title={item.title}
@@ -15,9 +19,9 @@ const HomeScreen = () => {
     />
   );
   return (
-    <Block flex backgroundColor="background">
-      <Header type="Home" />
-      <Block flex paddingHorizontal={16}>
+    <Block flex paddingHorizontal={16}>
+      <Header title="Bài viết của tôi" upload canGoBack />
+      <Block flex marginBottom={10}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={data}
@@ -29,4 +33,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default PersonalPost;

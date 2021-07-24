@@ -7,7 +7,7 @@ const FormLogin = ({label, placeholder, isSecure}) => {
     <Block marginTop={15}>
       <TextInput
         inputStyle={{color: theme.colors.black}}
-        labelStyle={{color: theme.colors.gray}}
+        labelStyle={{color: theme.colors.black}}
         label={label}
         inputContainer={{backgroundColor: 'background'}}
         placeholder={placeholder}
