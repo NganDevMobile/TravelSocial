@@ -2,7 +2,7 @@ import {Block, Text, TextInput} from '@components';
 import React from 'react';
 import {theme} from '@theme';
 
-const FormLogin = ({label, placeholder, isSecure}) => {
+const FormLogin = ({label, placeholder, isSecure, onChangeText}) => {
   return (
     <Block marginTop={15}>
       <TextInput
@@ -12,6 +12,7 @@ const FormLogin = ({label, placeholder, isSecure}) => {
         inputContainer={{backgroundColor: 'background'}}
         placeholder={placeholder}
         isSecure={isSecure}
+        onChangeText={onChangeText}
       />
     </Block>
   );

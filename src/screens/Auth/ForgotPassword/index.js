@@ -9,25 +9,22 @@ import FormLogin from '../Common/FormLogin';
 import {useNavigation} from '@react-navigation/core';
 import {routes} from '@navigation/routes';
 
-const LoginScreen = () => {
+const ForgotPassword = () => {
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  console.log('aaaaaaaa', email, password);
-
-  const _login = (email, password) => {
-    if (email == null || password == null) {
-      console.log('Vui lòng nhập đủ!');
+  const _fogotPassword = email => {
+    if (email == null) {
       ToastAndroid.show('Vui lòng nhập đủ!', ToastAndroid.SHORT);
     } else {
       var Data = {
         email: email,
-        password: password,
+        password: '$$^#^#$@@@#$$^&^$%#',
       };
 
-      fetch('http://10.0.2.2:8088/views/user_login.php', {
+      fetch('http://10.0.2.2:8088/views/user_forgot_password.php', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -39,12 +36,10 @@ const LoginScreen = () => {
         .then(response => {
           console.log('response: ');
           console.log(response);
-          if (response.is_auth == true) {
-            navigation.navigate(routes.BOTTOM_TAB);
-            ToastAndroid.show('Thành công!', ToastAndroid.SHORT);
-          } else {
-            ToastAndroid.show('Thất bại!', ToastAndroid.SHORT);
-          }
+          ToastAndroid.show(
+            'Vui lòng kiểm tra email của bạn',
+            ToastAndroid.SHORT,
+          );
         })
         .catch(error => console.error('>>>>>>>>', error));
     }
@@ -59,7 +54,7 @@ const LoginScreen = () => {
         />
       </Pressable>
       <Text size={24} marginTop={15} fontType="bold">
-        Đăng nhập
+        Nhập email tài khoản
       </Text>
       <Block marginTop={62}>
         <FormLogin
@@ -67,33 +62,15 @@ const LoginScreen = () => {
           placeholder="Nhập email của bạn"
           onChangeText={text => setEmail(text)}
         />
-        <FormLogin
-          isSecure
-          label="Password"
-          placeholder="************"
-          onChangeText={text => setPassword(text)}
-        />
         <Button
-          onPress={() => _login(email, password)}
+          onPress={() => _fogotPassword(email)}
           containerStyle={styles.containerStyle}
           titleStyle={styles.titleStyle}
-          title="Đăng nhập"
+          title="Gửi"
         />
-        <Block row alignCenter justifyCenter marginTop={15}>
-          <Text color={theme.colors.gray}>Bạn chưa có tài khoản ? </Text>
-          <Pressable onPress={() => navigation.navigate(routes.SIGNUP_SCREEN)}>
-            <Text>Đăng ký</Text>
-          </Pressable>
-        </Block>
-        <Block alignCenter marginTop={10}>
-          <Pressable
-            onPress={() => navigation.navigate(routes.FORGOT_PASSWORD)}>
-            <Text>Quên mật khẩu ?</Text>
-          </Pressable>
-        </Block>
       </Block>
     </Block>
   );
 };
 
-export default LoginScreen;
+export default ForgotPassword;

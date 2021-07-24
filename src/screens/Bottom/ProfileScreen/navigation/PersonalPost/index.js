@@ -11,13 +11,8 @@ const PersonalPost = () => {
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
   const user = 'aaa';
-  const _renderItemPost = item => (
-    <ItemPost
-    // title={item.title}
-    // picture={item.picture}
-    // group_id={item.group_id}
-    />
-  );
+
+  const _renderItemPost = item => <ItemPost />;
   return (
     <Block flex paddingHorizontal={16}>
       <Header title="Bài viết của tôi" upload canGoBack />

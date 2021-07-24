@@ -14,7 +14,9 @@ const OptionScreen = () => {
 
   return (
     <Block flex alignCenter justifyCenter paddingHorizontal={16}>
-      <Pressable style={styles.next}>
+      <Pressable
+        onPress={() => navigation.navigate(routes.BOTTOM_TAB)}
+        style={styles.next}>
         <Block>
           <Text center>Bỏ qua</Text>
         </Block>

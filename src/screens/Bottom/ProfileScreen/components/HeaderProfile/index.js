@@ -1,11 +1,10 @@
 import {Block, Text} from '@components';
+import {routes} from '@navigation/routes';
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {Image, Pressable} from 'react-native';
-import styles from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {icons} from '@assets';
-import {useNavigation} from '@react-navigation/core';
-import {routes} from '@navigation/routes';
+import styles from './styles';
 
 const HeaderProfile = ({icon, content}) => {
   const {top} = useSafeAreaInsets();

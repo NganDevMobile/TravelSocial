@@ -43,7 +43,7 @@ const dataOptions = [
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
-  const user = '';
+  const user = 'aaa';
   const _renderItem = item => (
     <ItemInfo icon={item.icon} content={item.content} />
   );
