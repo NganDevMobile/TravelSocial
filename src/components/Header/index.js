@@ -72,7 +72,7 @@ const HeaderCommon = ({title, canGoBack, upload}) => {
           </Text>
         )}
         {upload && (
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => navigation.navigate(routes.INSERT_POST)}>
             <Image
               source={icons.upload}
               style={styles.iconBack}

@@ -20,7 +20,7 @@ const RootStack = () => {
       />
       <Stack.Navigator
         mode="modal"
-        initialRouteName={routes.LAB_ONE}
+        initialRouteName={routes.BOTTOM_TAB}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name={routes.BOTTOM_TAB} component={BottomNavigation} />
         <Stack.Screen
@@ -58,6 +58,14 @@ const RootStack = () => {
         <Stack.Screen
           name={routes.PERSONAL_POST}
           component={bottom.PERSONAL_POST}
+        />
+        <Stack.Screen
+          name={routes.CHANGE_PASSWORD}
+          component={auth.CHANGE_PASSWORD}
+        />
+        <Stack.Screen
+          name={routes.INSERT_POST}
+          component={common.INSERT_POST}
         />
         {/* Labs */}
         <Stack.Screen name={routes.LAB_ONE} component={labs.LAB_ONE} />

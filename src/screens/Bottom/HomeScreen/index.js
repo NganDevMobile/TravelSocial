@@ -1,8 +1,7 @@
 import {Block, Header} from '@components';
-import React from 'react';
-import {FlatList, ScrollView} from 'react-native';
-import ItemGroup from '@components/Common/ItemList/ItemGroup';
 import ItemPost from '@components/Common/ItemList/ItemPost';
+import React from 'react';
+import {FlatList} from 'react-native';
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

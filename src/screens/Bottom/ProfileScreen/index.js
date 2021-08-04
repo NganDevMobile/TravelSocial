@@ -14,14 +14,17 @@ const dataInfo = [
   {
     icon: icons.details,
     content: 'Xem thông tin chi tiết',
+    navigation: routes.CHANGE_PASSWORD,
   },
   {
     icon: icons.edit,
     content: 'Chỉnh sửa thông tin cá nhân',
+    navigation: routes.CHANGE_PASSWORD,
   },
   {
     icon: icons.password,
     content: 'Đổi mật khẩu',
+    navigation: routes.CHANGE_PASSWORD,
   },
 ];
 
@@ -29,14 +32,17 @@ const dataOptions = [
   {
     icon: icons.contact,
     content: 'Liên hệ',
+    navigation: routes.CHANGE_PASSWORD,
   },
   {
     icon: icons.support,
     content: 'Hỗ trợ',
+    navigation: routes.CHANGE_PASSWORD,
   },
   {
     icon: icons.settings,
     content: 'Cài đặt',
+    navigation: routes.CHANGE_PASSWORD,
   },
 ];
 
@@ -45,7 +51,11 @@ const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const user = 'aaa';
   const _renderItem = item => (
-    <ItemInfo icon={item.icon} content={item.content} />
+    <ItemInfo
+      onPress={() => navigation.navigate(item.navigation)}
+      icon={item.icon}
+      content={item.content}
+    />
   );
   return (
     <Block paddingHorizontal={20}>
@@ -61,7 +71,6 @@ const ProfileScreen = () => {
           />
         </Block>
       )}
-
       <Block marginTop={15}>
         <Text size={17} marginBottom={15} fontType="bold">
           Quản lý thông tin
