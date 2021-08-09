@@ -5,26 +5,19 @@ import styles from './styles';
 import {icons} from '@assets';
 import {getSize} from '@utils/responsive';
 
-const ItemPost = ({
-  picture,
-  title,
-  group_id,
-  username,
-  date_upload,
-  content,
-}) => {
+const ItemPost = ({index, picture, title, username, content}) => {
   return (
-    <Block flex radius={5} marginTop={20}>
+    <Block key={index} flex radius={5} marginTop={20}>
       <Block row alignCenter space="between">
         <Block row alignCenter>
           <Image
             source={{
-              uri: 'https://scontent-sin6-2.xx.fbcdn.net/v/t1.6435-9/150472038_1049544385539282_5292912049991540628_n.jpg?_nc_cat=102&_nc_rgb565=1&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BpVzwAQW2IcAX__sWDg&_nc_ht=scontent-sin6-2.xx&oh=7eeca5e5b5e33f247fc4f6acce9a0dd0&oe=60FEDA1B',
+              uri: 'https://media.vov.vn/sites/default/files/styles/front_large/public/2020-08/3-blackpink-jisoo-dior-elle-korea-july-2020-issue-1-1.jpg',
             }}
             style={styles.avt}
           />
           <Text size={17} fontType="bold" marginLeft={10}>
-            Hiếu Ngân
+            Kim Jisoo
           </Text>
         </Block>
         <Image source={icons.more} style={styles.iconMore} />
@@ -32,18 +25,16 @@ const ItemPost = ({
       <Block shadow radius={5} marginTop={15} backgroundColor="white">
         <Image
           source={{
-            uri: 'https://owa.bestprice.vn/images/tours/large/tham-quan-vinh-ha-long-5e563331d21df-848x477.jpg',
+            uri: picture,
           }}
           style={styles.image}
         />
         <Block padding={10}>
           <Text size={17} fontType="bold">
-            Vịnh Hạ Long
+            {title}
           </Text>
           <Text size={14} numberOfLines={2}>
-            Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ tây vịnh Bắc Bộ tại khu
-            vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo của thành phố Hạ
-            Long thuộc tỉnh Quảng Ninh.
+            {content}
           </Text>
           <Block row alignCenter marginTop={15}>
             <Image source={icons.heart} style={styles.iconAction} />

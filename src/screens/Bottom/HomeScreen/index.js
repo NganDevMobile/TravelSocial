@@ -1,16 +1,35 @@
 import {Block, Header} from '@components';
 import ItemPost from '@components/Common/ItemList/ItemPost';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {FlatList} from 'react-native';
-
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import {useNavigation, useIsFocused} from '@react-navigation/core';
 
 const HomeScreen = () => {
-  const _renderItemPost = item => (
+  const [data, setData] = useState([]);
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    fetch('http://10.0.2.2:8088/views/post_get_all.php', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(json => setData(json));
+  }, [isFocused]);
+
+  console.log('Data', data);
+  const _renderItemPost = ({item, index}) => (
     <ItemPost
-    // title={item.title}
-    // picture={item.picture}
-    // group_id={item.group_id}
+      index={index}
+      id={item.id}
+      title={item.title}
+      content={item.content}
+      picture={item.picture}
+      user_id={item.user_id}
     />
   );
   return (

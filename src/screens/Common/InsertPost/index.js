@@ -15,6 +15,10 @@ const InsertPost = ({route}) => {
   return (
     <Block flex paddingHorizontal={16} backgroundColor={theme.colors.white}>
       <Header canGoBack title="Thêm bài viết" />
+      <Block>
+        <TextInput label="Tiêu đề" />
+        <TextInput label="Nội dung" />
+      </Block>
     </Block>
   );
 };
