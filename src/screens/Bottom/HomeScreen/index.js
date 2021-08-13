@@ -3,6 +3,7 @@ import ItemPost from '@components/Common/ItemList/ItemPost';
 import React, {useState, useEffect} from 'react';
 import {FlatList} from 'react-native';
 import {useNavigation, useIsFocused} from '@react-navigation/core';
+import {routes} from '@navigation/routes';
 
 const HomeScreen = () => {
   const [data, setData] = useState([]);
@@ -21,9 +22,9 @@ const HomeScreen = () => {
       .then(json => setData(json));
   }, [isFocused]);
 
-  console.log('Data', data);
   const _renderItemPost = ({item, index}) => (
     <ItemPost
+      onPress={() => navigation.navigate(routes.UPDATE_POST, {item: item})}
       index={index}
       id={item.id}
       title={item.title}

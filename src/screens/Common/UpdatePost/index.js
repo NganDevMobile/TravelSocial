@@ -3,34 +3,25 @@ import storage from '@react-native-firebase/storage';
 import {useNavigation} from '@react-navigation/core';
 import {theme} from '@theme';
 import React, {useState} from 'react';
-import {Image, Pressable, ToastAndroid, Platform} from 'react-native';
+import {Image, Pressable, ToastAndroid, Platform, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import styles from './styles';
 import {width} from '@utils/responsive';
 import {routes} from '@navigation/routes';
 
-const InsertPost = () => {
+const UpdatePost = ({route}) => {
+  const {item: post} = route.params;
+
   const navigation = useNavigation();
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  const [picture, setPicture] = useState(
-    'https://media.vov.vn/sites/default/files/styles/front_large/public/2020-08/3-blackpink-jisoo-dior-elle-korea-july-2020-issue-1-1.jpg',
-  );
+
+  const [id, setId] = useState(post.id);
+  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState(post.content);
+  const [picture, setPicture] = useState(post.picture);
   const [user_id, setUserId] = useState(1);
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
 
-  // const chooseFile = () => {
-  //   ImagePicker.openPicker({
-  //     width: 300,
-  //     height: 400,
-  //     cropping: true,
-  //   }).then(picture => {
-  //     console.log(picture);
-  //     console.log(picture.path);
-  //     setPicture(picture.path);
-  //   });
-  // };
   const choosePhotoFromLibrary = () => {
     ImagePicker.openPicker({
       width: 1200,
@@ -81,10 +72,6 @@ const InsertPost = () => {
       setPicture(null);
       console.log(url);
 
-      // Alert.alert(
-      //   'Image uploaded!',
-      //   'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
-      // );
       return url;
     } catch (e) {
       console.log(e);
@@ -93,30 +80,7 @@ const InsertPost = () => {
     }
   };
 
-  // const _uploadImage = async (nameImg, uri) => {
-  //   const path = 'images/' + nameImg + '.jpg';
-  //   return new Promise(async (res, rej) => {
-  //     const response = await fetch(uri);
-  //     const file = await response.blob();
-
-  //     let upload = storage().ref(path).putFile(file);
-
-  //     upload.on(
-  //       'state_changed',
-  //       snapshot => {},
-  //       err => {
-  //         rej(err);
-  //       },
-  //       async () => {
-  //         const url = await upload.snapshot.ref.getDownloadURL();
-  //         res(url);
-  //         ToastAndroid.show('Upload success!', ToastAndroid.SHORT);
-  //       },
-  //     );
-  //   });
-  // };
-
-  const _insert = async (title, content, picture, user_id) => {
+  const _update = async (id, title, content, picture, user_id) => {
     // const remoteUri = await uploadImage(picture);
     // console.log('Image Url: ', remoteUri);
     const remoteUri = await uploadImage();
@@ -124,13 +88,14 @@ const InsertPost = () => {
       ToastAndroid.show('Vui lòng nhập đủ!', ToastAndroid.SHORT);
     } else {
       var Data = {
+        id: id,
         title: title,
         content: content,
         picture: remoteUri,
         user_id: user_id,
       };
 
-      fetch('http://10.0.2.2:8088/views/post_insert.php', {
+      fetch('http://10.0.2.2:8088/views/post_update.php', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -143,22 +108,56 @@ const InsertPost = () => {
           console.log('response: ');
           console.log(response);
           navigation.navigate(routes.BOTTOM_TAB);
-          ToastAndroid.show('Thành công!', ToastAndroid.SHORT);
+          ToastAndroid.show('Updated!', ToastAndroid.SHORT);
         });
       // .catch(error => console.error('>>>>>>>>', error));
     }
   };
 
+  const _del = async id => {
+    var Data = {
+      id: id,
+    };
+    fetch('http://10.0.2.2:8088/views/post_delete.php', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(Data),
+    })
+      .then(response => response.json())
+      .then(response => {
+        console.log('response: ');
+        console.log(response);
+        navigation.navigate(routes.BOTTOM_TAB);
+        console.log('Deleted!');
+        ToastAndroid.show('Deleted!', ToastAndroid.SHORT);
+      });
+    // .catch(error => console.error('>>>>>>>>', error));
+  };
+
+  const _delete = () =>
+    Alert.alert('DELETE', 'Do you want to delete this item?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => _del(id)},
+    ]);
   return (
     <Block flex paddingHorizontal={16} backgroundColor={theme.colors.white}>
-      <Header canGoBack title="Thêm bài viết" />
+      <Header canGoBack title="Chỉnh sửa bài viết" />
       <Block>
         <TextInput
+          value={title}
           onChangeText={text => setTitle(text)}
           label="Tiêu đề"
           labelStyle={{fontWeight: 'bold'}}
         />
         <TextInput
+          value={content}
           onChangeText={text => setContent(text)}
           label="Nội dung"
           labelStyle={{fontWeight: 'bold'}}
@@ -176,12 +175,17 @@ const InsertPost = () => {
           </Pressable>
         </Block>
         <Button
-          onPress={() => _insert(title, content, picture, user_id)}
-          title="Đăng"
+          onPress={() => _update(id, title, content, picture, user_id)}
+          title="Lưu"
+        />
+        <Button
+          containerStyle={{backgroundColor: theme.colors.red}}
+          onPress={() => _delete(id)}
+          title="Xóa bài viết"
         />
       </Block>
     </Block>
   );
 };
 
-export default InsertPost;
+export default UpdatePost;

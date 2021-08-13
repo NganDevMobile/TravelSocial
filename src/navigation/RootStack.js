@@ -67,6 +67,10 @@ const RootStack = () => {
           name={routes.INSERT_POST}
           component={common.INSERT_POST}
         />
+        <Stack.Screen
+          name={routes.UPDATE_POST}
+          component={common.UPDATE_POST}
+        />
         {/* Labs */}
         <Stack.Screen name={routes.LAB_ONE} component={labs.LAB_ONE} />
         <Stack.Screen name={routes.LAB_TWO} component={labs.LAB_TWO} />
